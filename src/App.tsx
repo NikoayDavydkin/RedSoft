@@ -1,25 +1,51 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Navigate, Routes, Route } from "react-router-dom";
+import BrowsePage from "./pages/browsePage/BrowsePage";
+import LoginPage from "./pages/loginPage/LoginPage";
+import MainPages from "./pages/mainPages/MainPages";
+import { dataObject } from "./server";
+import { IDeafaultState } from "./types";
+// import { getResponse } from "./functions";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // искуственный запрос
+
+    // async function getData() {
+    // const response = await getResponse(`url`, "GET");
+    // if (response.ok) {
+    //   const data = await response.json();
+    //   dispatch({ type: "SET_DATA", payload: data[0]["children"] });
+    //   dispatch({ type: "STOP_LOADING" });
+    // }
+    // }
+    // getData();
+
+    setTimeout(() => {
+      const data = dataObject[0]["children"];
+      dispatch({ type: "SET_DATA", payload: data });
+      dispatch({ type: "STOP_LOADING" });
+    }, 2000);
+  }, []);
+
+  const logined = useSelector((state: IDeafaultState) => state.logined);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/" element={<MainPages />} />
+      <Route
+        path="/login"
+        element={logined ? <Navigate to="/" /> : <LoginPage />}
+      />
+      <Route
+        path="/browse"
+        element={logined ? <BrowsePage /> : <Navigate to="/login" />}
+      />
+      <Route path="*" element={<Navigate to="/" />} />
+    </Routes>
   );
 }
 

@@ -1,0 +1,56 @@
+.login {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.formLogin {
+  padding: 20px;
+  width: 300px;
+  height: 300px;
+  background-color: white;
+  border: 2px solid #ff333b;
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inputs {
+  width: 100%;
+  height: 50px;
+  padding: 10px;
+  border: 2px solid black;
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.inputs:focus {
+  outline: none;
+  border: 2px solid #ff333b;
+}
+
+.errorsInfo {
+  margin-bottom: 30px;
+  color: red;
+}
+
+.buttonSubmit {
+  display: flex;
+  width: fit-content;
+  height: fit-content;
+  background-color: #ff333b;
+  color: white;
+  border: none;
+  font-size: 20px;
+  font-weight: 400;
+  padding: 15px;
+  cursor: pointer;
+  border-radius: 7px;
+}
+
+.buttonSubmit:hover {
+  background-color: #f8494f;
+}
